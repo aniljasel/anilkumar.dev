@@ -28,7 +28,7 @@ function About() {
                     </div>
                 </div>
                 <div className="about-image">
-                    <img src={about} alt="Developer working"></img>
+                    <img src={about} alt="Developer working" loading="lazy"></img>
                 </div>
             </div>
             <div className="floating-icons">

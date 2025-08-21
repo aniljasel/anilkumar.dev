@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
 import CustomCursor from './components/Cursor';
 import Header from './components/header';
@@ -12,7 +12,25 @@ import Experience from './components/experience';
 import ParticleBackground from './components/ParticleBackground';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+const titles = [
+  "Anil Kumar",
+  "Portfolio",
+  "MERN Technologies",
+  "Full Stack Developer",
+  "UI/UX Designer"
+];
+
 function App() {
+
+  useEffect(() => {
+    let idx = 0;
+    const interval = setInterval(() => {
+      document.title = titles[idx];
+      idx = (idx + 1) % titles.length;
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <BrowserRouter>

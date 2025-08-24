@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import project1 from '../assests/media/schedule-manager.png';
 import project2 from '../assests/media/paying-guest.png';
+import project3 from '../assests/media/DPDigitalAgency.png';
 
 const Project = () => {
     const [filter, setFilter] = useState('all');
@@ -14,7 +15,7 @@ const Project = () => {
             image: project1,
             demoLink: 'https://schedule-manager-psi.vercel.app',
             codeLink: 'https://github.com/aniljasel/Schedule-Manager',
-            category: 'frontend'
+            category: ['fullstack', 'backend']
         },
         {
             id: 2,
@@ -24,17 +25,17 @@ const Project = () => {
             image: project2,
             demoLink: 'https://paying-guest-smoky.vercel.app',
             codeLink: 'https://github.com/AU-Teams/paying-guest',
-            category: 'frontend'
+            category: ['fullstack', 'backend']
         },
         {
             id: 3,
-            title: 'Social Media Analytics',
-            description: 'A dashboard that aggregates and visualizes social media metrics across multiple platforms with customizable reports.',
-            tags: ['Next.js', 'Python', 'D3.js', 'AWS'],
-            image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80',
-            demoLink: '#',
-            codeLink: '#',
-            category: 'backend'
+            title: 'DPDigitalAgency',
+            description: 'Developed a responsive website for DP Creatives showcasing their digital marketing, SEO, and web development services with a focus on enhancing brand presence and client engagement.',
+            tags: ['HTML5', 'CSS', 'JavaScirpt'],
+            image: project3,
+            demoLink: 'https://aniljasel.github.io/DPDigitalAgency',
+            codeLink: 'https://github.com/aniljasel/DPDigitalAgency',
+            category: ['frontend']
         }
     ];
 
@@ -44,7 +45,9 @@ const Project = () => {
         setFilter(category);
     };
 
-    const filteredProjects = filter === 'all' ? projects : projects.filter(project => project.category === filter);
+    const filteredProjects = filter === 'all'
+        ? projects
+        : projects.filter(project => project.category.includes(filter));
 
     return (
         <section className="section" id="projects">

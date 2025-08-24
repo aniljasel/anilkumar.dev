@@ -52,28 +52,28 @@ const WorkExperience = () => {
                 </div>
                 <div className="timeline-item">
                     <div className="timeline-content">
-                        <div className="timeline-date">2018 - 2021</div>
-                        <h3 className="timeline-title">Senior Web Developer</h3>
+                        <div className="timeline-date">---- - ----</div>
+                        <h3 className="timeline-title">------------------</h3>
                         <p className="timeline-desc">
-                            Digital Innovations Agency - Developed custom web applications for Fortune 500 clients. Implemented CI/CD pipelines and mentored junior developers.
+                            ------------------------------------------------------------------------------------
                         </p>
                     </div>
                 </div>
                 <div className="timeline-item">
                     <div className="timeline-content">
-                        <div className="timeline-date">2016 - 2018</div>
-                        <h3 className="timeline-title">Frontend Developer</h3>
+                        <div className="timeline-date">---- - ----</div>
+                        <h3 className="timeline-title">------------------</h3>
                         <p className="timeline-desc">
-                            Creative Web Solutions - Built responsive user interfaces and implemented modern JavaScript frameworks. Collaborated with designers to create pixel-perfect implementations.
+                            ------------------------------------------------------------------------------------
                         </p>
                     </div>
                 </div>
                 <div className="timeline-item">
                     <div className="timeline-content">
-                        <div className="timeline-date">2014 - 2016</div>
-                        <h3 className="timeline-title">Junior Web Developer</h3>
+                        <div className="timeline-date">---- - ----</div>
+                        <h3 className="timeline-title">------------------</h3>
                         <p className="timeline-desc">
-                            StartUp Ventures - Developed and maintained company websites. Assisted in building internal tools and systems.
+                            ------------------------------------------------------------------------------------
                         </p>
                     </div>
                 </div>

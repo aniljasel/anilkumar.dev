@@ -554,7 +554,7 @@ header {
 }
 
 .project-filter {
-    display: none;
+    display: flex;
     flex-direction: row;
     gap: 10px;
 }

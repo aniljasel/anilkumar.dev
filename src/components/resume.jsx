@@ -121,8 +121,8 @@ const Resume = () => {
         </div>
         <div className="toolbar-sep"></div>
         <div className="toolbar-group">
-          <button onClick={handleZoomOut}><i className="fas fa-minus"></i></button>
-          <button onClick={handleZoomIn}><i className="fas fa-plus"></i></button>
+          <button onClick={handleZoomOut}><i className="fa-solid fa-magnifying-glass-minus"></i></button>
+          <button onClick={handleZoomIn}><i className="fa-solid fa-magnifying-glass-plus"></i></button>
         </div>
         <div className="toolbar-sep"></div>
         <div className="toolbar-group">

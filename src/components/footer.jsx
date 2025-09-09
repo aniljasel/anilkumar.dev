@@ -1,13 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import Chatbot from './chatbot';
 import Tooltip from './Tooltip';
 
 function Footer() {
     // Hover effect text
-    const { tooltipRef, handleMouseMove, handleMouseLeave } = Tooltip();
+    const { tooltipRef } = Tooltip();
+    const [activeTooltip, setActiveTooltip] = useState(null);
+
+    const handleMouseMove = (e, label) => {
+        setActiveTooltip(label);
+        if (tooltipRef.current) {
+            tooltipRef.current.style.left = `${e.clientX + 10}px`;
+            tooltipRef.current.style.top = `${e.clientY - 30}px`;
+            tooltipRef.current.textContent = label;
+            tooltipRef.current.style.opacity = 1;
+        }
+    };
+
+    const handleMouseLeave = () => {
+        setActiveTooltip(null);
+        if (tooltipRef.current) {
+            tooltipRef.current.style.opacity = 0;
+        }
+    };
+    
     // Theme Button
     const [isLightTheme, setIsLightTheme] = useState(false);
     const toggleTheme = () => setIsLightTheme(prev => !prev);
+
+    // Chatbot Toggle
+    const [isChatOpen, setIsChatOpen] = useState(false);
+    const toggleChat = () => {
+        setIsChatOpen(prev => !prev);
+    };
 
     useEffect(() => {
         document.body.classList.toggle('light-theme', isLightTheme);
@@ -75,6 +100,18 @@ function Footer() {
                 </div>
                 <p className="copyright">© 2025 Anil Developer. All rights reserved.</p>
             </footer>
+
+            {!isChatOpen && (
+            <div className="chatbot-toggle" onClick={toggleChat} aria-label="Toggle Chatbot" onMouseMove={(e) => handleMouseMove(e, "Chatbot")} onMouseLeave={handleMouseLeave} >
+                <i className="fas fa-robot"></i>
+            </div>
+            )}
+            {isChatOpen && (
+                <div className="chatbot-wrapper">
+                    <Chatbot onClose={() => setIsChatOpen(false)} />
+                </div>
+            )}
+
             <div className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme" onMouseMove={(e) => handleMouseMove(e, "Theme")} onMouseLeave={handleMouseLeave}>
                 {isLightTheme ? (
                     <i className="fas fa-sun"></i>
@@ -82,7 +119,17 @@ function Footer() {
                     <i className="fas fa-moon"></i>
                 )}
             </div>
-            <span ref={tooltipRef} className="tooltip-footer"></span>
+            <span 
+                ref={tooltipRef} 
+                className="tooltip-footer" 
+                style={{ display: isChatOpen && activeTooltip === "Chatbot"
+                    ? "none"
+                    : activeTooltip
+                    ? "flex"
+                    : "none" }}
+            >
+                {activeTooltip}
+            </span>
         </>
     );
 }

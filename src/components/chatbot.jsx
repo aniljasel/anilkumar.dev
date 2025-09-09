@@ -21,7 +21,7 @@ const Chatbot = ({ onClose }) => {
         setIsTyping(true);
 
         try {
-            const response = await fetch("/api/chat", {
+            const response = await fetch("http://localhost:3001/api/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: input }),
@@ -31,7 +31,7 @@ const Chatbot = ({ onClose }) => {
             setIsTyping(false);
 
             const botMessage = {
-                text: data.reply || "⚠️ Sorry, I couldn't generate a response.",
+                text: data.reply || "Sorry, I couldn't generate a response.",
                 sender: "bot",
             };
 

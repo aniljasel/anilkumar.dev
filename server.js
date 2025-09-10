@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-dotenv.config();
+dotenv.config({ path: '.env.local' });
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:5173' }));
@@ -12,35 +12,38 @@ app.use(express.json());
 app.post('/api/chat', async (req, res) => {
     console.log('Received POST /api/chat:', req.body);
     const { message } = req.body;
-    const apiKey = process.env.DEEPAI_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
 
     if (!message) return res.status(400).json({ error: 'No message provided' });
     if (!apiKey) return res.status(500).json({ error: 'API key missing' });
 
     try {
-        console.log('Calling DeepAI...');
-        const response = await fetch('https://api.deepai.org/api/text-generator', {
-        method: 'POST',
-        headers: {
-            'Api-Key': apiKey,
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `text=${encodeURIComponent(message)}`,
+        console.log('Calling Groq API...');
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                model: 'llama-3.3-70b-versatile', // free fast model
+                messages: [{ role: 'user', content: message }],
+            }),
         });
-        console.log('DeepAI status:', response.status);
 
-        console.log('DeepAI status:', response.status); // <-- Add this
+        console.log('Groq status:', response.status);
         const data = await response.json();
-        console.log('DeepAI response:', JSON.stringify(data, null, 2)); // <-- Already present
+        console.log('Groq response:', JSON.stringify(data, null, 2));
 
-        if (data.err || data.error) {
-            console.error('DeepAI API error:', data.err || data.error);
-            return res.status(500).json({ error: data.err || data.error });
+        if (data.error) {
+            console.error('Groq API error:', data.error);
+            return res.status(500).json({ error: data.error.message || 'Groq API error' });
         }
 
-        res.json({ reply: data.output || "Sorry, I couldn't generate a response." });
+        const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
+        res.json({ reply });
     } catch (err) {
-        console.error('DeepAI API error (catch):', err);
+        console.error('Groq API error (catch):', err);
         res.status(500).json({ error: String(err) });
     }
 });

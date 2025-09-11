@@ -12,6 +12,8 @@ export default async function handler(req, res) {
     if (!message) return res.status(400).json({ error: "No message provided" });
     if (!apiKey) return res.status(500).json({ error: "API key missing" });
 
+    console.log("Incoming message:", message);
+
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -24,7 +26,9 @@ export default async function handler(req, res) {
       }),
     });
 
+    console.log("Groq status:", response.status);
     const data = await response.json();
+    console.log("Groq response:", JSON.stringify(data, null, 2));
 
     if (data.error) {
       return res.status(500).json({ error: data.error.message || "Groq API error" });
@@ -34,6 +38,7 @@ export default async function handler(req, res) {
       data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
     res.status(200).json({ reply });
   } catch (err) {
+    console.error("Groq API error (catch):", err);
     res.status(500).json({ error: String(err) });
   }
 }

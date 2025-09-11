@@ -1,5 +1,5 @@
 export const config = {
-  runtime: "edge", // ✅ Vercel Edge Functions (faster, fetch-native)
+  runtime: "edge",
 };
 
 export default async function handler(req) {
@@ -11,7 +11,7 @@ export default async function handler(req) {
   }
 
   try {
-    // ✅ Parse body (Edge runtime provides req.json())
+    // ✅ Parse JSON body directly (Edge runtime supports this)
     const { message } = await req.json();
     const apiKey = process.env.GROQ_API_KEY;
 
@@ -29,6 +29,7 @@ export default async function handler(req) {
       });
     }
 
+    // ✅ Call Groq API
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 const Chatbot = ({ onClose }) => {
     const [messages, setMessages] = useState([
-        { text: "Hello! I'm Anil Kumar, a MERN stack developer. How can I assist you today?", sender: "bot" },
+        { text: "Hello! I'm Sora, your AI assistant powered by Anil Kumar.", sender: "bot" },
     ]);
     const [input, setInput] = useState("");
     const [isTyping, setIsTyping] = useState(false);
@@ -31,7 +31,7 @@ const Chatbot = ({ onClose }) => {
             setIsTyping(false);
 
             const botMessage = {
-                text: data.reply || "Sorry, I couldn't generate a response.",
+                text: data.reply || "☹️ Sorry, I couldn't generate a response.",
                 sender: "bot",
             };
 
@@ -40,7 +40,7 @@ const Chatbot = ({ onClose }) => {
             setIsTyping(false);
             setMessages((prev) => [
                 ...prev,
-                { text: "⚠️ API Error! Please try again later.", sender: "bot" },
+                { text: "API Error! Please try again later.", sender: "bot" },
             ]);
         }
     };
@@ -76,6 +76,7 @@ const Chatbot = ({ onClose }) => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                    autoFocus
                 />
                 <button onClick={handleSend}>➤</button>
             </div>

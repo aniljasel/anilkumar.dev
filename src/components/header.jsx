@@ -33,17 +33,17 @@ function Header() {
 
             {/* Mobile Bottom Navigation */}
             <nav className="mobile-bottom-nav">
-                <Link to="/" className="nav-icon">
-                    <i className="fas fa-home"></i>
-                    <span className="nav-text">Home</span>
-                </Link>
                 <Link to="about" className="nav-icon">
                     <i className="fas fa-user"></i>
                     <span className="nav-text">About</span>
                 </Link>
                 <Link to="skills" className="nav-icon">
-                    <i className="fas fa-cogs"></i>
+                    <i className="fas fa-laptop-code"></i>
                     <span className="nav-text">Skills</span>
+                </Link>
+                <Link to="/" className="nav-icon">
+                    <i className="fas fa-home"></i>
+                    <span className="nav-text">Home</span>
                 </Link>
                 <Link to="project" className="nav-icon">
                     <i className="fas fa-briefcase"></i>
@@ -53,10 +53,6 @@ function Header() {
                     <i className="fa-solid fa-award"></i>
                     <span className="nav-text">Experience</span>
                 </Link>
-                {/* <Link to="contact" className="nav-icon">
-                    <i className="fas fa-envelope"></i>
-                    <span className="nav-text">Contact</span>
-                </Link> */}
             </nav>
         </>
     );

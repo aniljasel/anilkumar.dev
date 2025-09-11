@@ -24,8 +24,24 @@ app.post("/api/chat", async (req, res) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        messages: [{ role: "user", content: message }],
+        model: "llama-3.1-8b-instant",
+        messages: [
+          {
+            role: "system",
+            content: `You are a helpful assistant representing Anil Kumar.
+            Anil Kumar is a MERN stack developer with expertise in React, Node.js, Express, and MongoDB.
+            Frontend Development: He creates responsive and user-friendly web interfaces using React, HTML, CSS, and JavaScript.
+            Graphic Design: He designs visually appealing graphics and layouts using tools like Figma and Canva.
+            He builds full-stack applications with modern, responsive UI and clean code.
+            He is experienced in creating REST APIs, managing databases, and deploying web projects.
+            He values problem-solving, performance, and user-friendly design.
+
+            When users ask about Anil Kumar, describe his professional skills and portfolio projects.
+            Never share sensitive or personal information such as home address, or credentials.
+            Always answer politely, clearly, and professionally.`,
+          },
+          { role: "user", content: message },
+        ],
       }),
     });
 

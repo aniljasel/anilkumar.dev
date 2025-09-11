@@ -1,18 +1,16 @@
-import fetch from "node-fetch";
-
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { message } = req.body;
+    const { message } = await req.body; // Vercel pe kabhi direct req.body kaam nahi karta
     const apiKey = process.env.GROQ_API_KEY;
 
     if (!message) return res.status(400).json({ error: "No message provided" });
     if (!apiKey) return res.status(500).json({ error: "API key missing" });
 
-    console.log("Incoming message:", message);
+    console.log("➡️ Incoming message:", message);
 
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -26,19 +24,18 @@ export default async function handler(req, res) {
       }),
     });
 
-    console.log("Groq status:", response.status);
+    console.log("➡️ Groq status:", response.status);
     const data = await response.json();
-    console.log("Groq response:", JSON.stringify(data, null, 2));
+    console.log("➡️ Groq response:", JSON.stringify(data, null, 2));
 
     if (data.error) {
       return res.status(500).json({ error: data.error.message || "Groq API error" });
     }
 
-    const reply =
-      data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
-    res.status(200).json({ reply });
+    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
+    return res.status(200).json({ reply });
   } catch (err) {
-    console.error("Groq API error (catch):", err);
-    res.status(500).json({ error: String(err) });
+    console.error("❌ Groq API error:", err);
+    return res.status(500).json({ error: String(err) });
   }
 }

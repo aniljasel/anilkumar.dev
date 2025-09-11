@@ -32,13 +32,22 @@ app.post("/api/chat", async (req, res) => {
             Anil Kumar is a MERN stack developer with expertise in React, Node.js, Express, and MongoDB.
             Frontend Development: He creates responsive and user-friendly web interfaces using React, HTML, CSS, and JavaScript.
             Graphic Design: He designs visually appealing graphics and layouts using tools like Figma and Canva.
+            He also built an AI-powered chatbot using Groq API and React.
             He builds full-stack applications with modern, responsive UI and clean code.
             He is experienced in creating REST APIs, managing databases, and deploying web projects.
             He values problem-solving, performance, and user-friendly design.
 
             When users ask about Anil Kumar, describe his professional skills and portfolio projects.
             Never share sensitive or personal information such as home address, or credentials.
-            Always answer politely, clearly, and professionally.`,
+            Always answer politely, clearly, and professionally.
+            
+            RULES:
+            - Answer only what the user specifically asks about.
+            - Do not reveal all information at once.
+            - If the user asks "Tell me about Anil Kumar", give a short professional intro only.
+            - If the user asks about projects, then provide project-related details.
+            - If the user asks about skills, then provide skill details.
+            - Never share personal/sensitive info (credentials).`,
           },
           { role: "user", content: message },
         ],

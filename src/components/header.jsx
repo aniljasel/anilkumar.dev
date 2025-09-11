@@ -53,10 +53,10 @@ function Header() {
                     <i className="fa-solid fa-award"></i>
                     <span className="nav-text">Experience</span>
                 </Link>
-                <Link to="contact" className="nav-icon">
+                {/* <Link to="contact" className="nav-icon">
                     <i className="fas fa-envelope"></i>
                     <span className="nav-text">Contact</span>
-                </Link>
+                </Link> */}
             </nav>
         </>
     );

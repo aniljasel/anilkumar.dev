@@ -1314,6 +1314,12 @@ footer {
     .animate-circles {
         display: none;
     }
+
+    .cursor,
+    .cursor-follower,
+    .tooltip-footer {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {

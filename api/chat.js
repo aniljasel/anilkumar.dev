@@ -4,7 +4,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = await req.body; // Vercel pe kabhi direct req.body kaam nahi karta
+    // ✅ Parse request body manually
+    const buffers = [];
+    for await (const chunk of req) {
+      buffers.push(chunk);
+    }
+    const bodyString = Buffer.concat(buffers).toString();
+    const { message } = JSON.parse(bodyString || "{}");
+
     const apiKey = process.env.GROQ_API_KEY;
 
     if (!message) return res.status(400).json({ error: "No message provided" });
@@ -32,7 +39,8 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: data.error.message || "Groq API error" });
     }
 
-    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
+    const reply =
+      data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
     return res.status(200).json({ reply });
   } catch (err) {
     console.error("❌ Groq API error:", err);

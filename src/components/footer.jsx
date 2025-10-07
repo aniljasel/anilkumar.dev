@@ -101,11 +101,11 @@ function Footer() {
                 <p className="copyright">© 2025 Anil Developer. All rights reserved.</p>
             </footer>
 
-            {!isChatOpen && (
+            {/* {!isChatOpen && (
             <div className="chatbot-toggle" onClick={toggleChat} aria-label="Toggle Chatbot" onMouseMove={(e) => handleMouseMove(e, "Chatbot")} onMouseLeave={handleMouseLeave} >
                 <i className="fas fa-robot"></i>
             </div>
-            )}
+            )} */}
             {isChatOpen && (
                 <div className="chatbot-wrapper">
                     <Chatbot onClose={() => setIsChatOpen(false)} />

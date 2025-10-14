@@ -21,17 +21,27 @@ const Chatbot = ({ onClose }) => {
         setIsTyping(true);
 
         try {
-            const response = await fetch("https://anilkumar-dev.onrender.com/api/chat", {
+            const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || window.location.origin;
+            const response = await fetch(`${apiBaseUrl}/api/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ message: input }),
             });
 
-            const data = await response.json();
+            let data;
+            try {
+                data = await response.json();
+            } catch {
+                data = {};
+            }
+            
+            if (!response.ok) {
+                throw new Error(data?.error || `Request failed with status ${response.status}`);
+            }
             setIsTyping(false);
 
             const botMessage = {
-                text: data.reply || "☹️ Sorry, I couldn't generate a response.",
+                text: data.reply || data.error || "☹️ Sorry, I couldn't generate a response.",
                 sender: "bot",
             };
 
@@ -40,7 +50,7 @@ const Chatbot = ({ onClose }) => {
             setIsTyping(false);
             setMessages((prev) => [
                 ...prev,
-                { text: "API Error! Please try again later.", sender: "bot" },
+                { text: `API Error: ${error?.message || "Please try again later."}` , sender: "bot" },
             ]);
         }
     };

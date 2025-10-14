@@ -41,7 +41,7 @@ const WorkExperience = () => {
                 <div className="timeline-item">
                     <div className="timeline-content">
                         <div className="timeline-date">May 2025 - Aug 2025</div>
-                        <h3 className="timeline-title">Full Stack Developer (MERN)</h3>
+                        <h3 className="timeline-title">(MERN) Full Stack Developer</h3>
                         <p className="timeline-desc">
                             AU IGNITE - Future Skills Centre - Lead a team of 7 developers to build a React-based web application 'Schedule Manager'.
                         </p>

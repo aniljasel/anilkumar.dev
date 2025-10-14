@@ -40,6 +40,8 @@ function Certificates() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="Certificate-container">
                 <div className="Certificate-card">
                     <div className="Certificate-author">
                         <div className="Certificate-image">

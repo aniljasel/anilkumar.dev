@@ -6,6 +6,23 @@ function Hero() {
     const [typedText, setTypedText] = useState('');
     const fullText = "Hi, I'm Anil Kumar";
 
+    const [flipText, setFlipText] = useState('Full Stack Web Developer');
+const [isFlipping, setIsFlipping] = useState(false);
+const flipOptions = ['UI/UX Designer'];
+useEffect(() => {
+    let index = 0;
+    const flipInterval = setInterval(() => {
+        setIsFlipping(true);
+        setFlipText("");
+        setTimeout(() => {
+            index = (index + 1) % (flipOptions.length + 1);
+            setFlipText(index === 0 ? 'Full Stack Web Developer' : flipOptions[index - 1]);
+            setIsFlipping(false);
+        }, 300);
+    }, 3000);
+    return () => clearInterval(flipInterval);
+}, []);
+
     useEffect(() => {
         let i = 0;
         const typeWriter = () => {
@@ -17,7 +34,7 @@ function Hero() {
         };
 
         const timer = setTimeout(typeWriter, 1000);
-        
+
         return () => clearTimeout(timer);
     }, []);
 
@@ -25,7 +42,11 @@ function Hero() {
         <section className="hero" id="home">
             <div className="hero-content">
                 <h1 className="fade-in">{typedText}</h1>
-                <h2 className="fade-in delay-1">Full Stack Web Developer</h2>
+                <h2 className="fade-in delay-1">
+                    <span className={`flip-box${isFlipping ? ' flipping' : ''}`}>
+                        <span className="flip-box-inner">{flipText}</span>
+                    </span>
+                </h2>
                 <p className="fade-in delay-2">
                     I build exceptional digital experiences with modern technologies and innovative solutions.
                 </p>

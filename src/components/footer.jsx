@@ -109,7 +109,7 @@ function Footer() {
                             <nav className='nav-links'>
                                 <Link to="/">Home</Link>
                                 <Link to="about">About</Link>
-                                <Link to="skills">Skills</Link>
+                                <Link to="skills">Resume</Link>
                             </nav>
                         </div>
                         <div className='footer-links'>
@@ -136,6 +136,10 @@ function Footer() {
                     </div>
                 )
             } */}
+            
+            <div className="Whatsapp-toggle" aria-label="Toggle whatsapp" onMouseMove={(e) => handleMouseMove(e, "Connect")} onMouseLeave={handleMouseLeave}>
+                <a href="https://wa.me/916378346576" target="_blank"><i className="fab fa-whatsapp"></i></a>
+            </div>
 
             <div className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme" onMouseMove={(e) => handleMouseMove(e, "Theme")} onMouseLeave={handleMouseLeave}>
                 {isLightTheme ? (

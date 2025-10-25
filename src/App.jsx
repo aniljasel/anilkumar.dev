@@ -43,7 +43,7 @@ function App() {
           <Route path='/skills' element={<Skills />} />
           <Route path='/project' element={<Project />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/experience' element={<Experience />} />
+          <Route path='/experience' element={<Experience />} />z
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -5,7 +5,7 @@ const Loader = () => {
         <section id="Start" className="animate-circles">
             <div className="row">
                 <div className="col-lg-12">
-                    <div className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+                    <div className="d-flex justify-content-center align-items-center" >
                         <div>
                             <div id="Loader" className="svg-frame mb-4">
                                 {/* Base SVG */}

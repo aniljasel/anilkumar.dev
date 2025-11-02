@@ -3,6 +3,7 @@ import './App.css'
 import CustomCursor from './components/Cursor';
 import Header from './components/header';
 import Footer from './components/footer';
+import MobileFooter from './components/Footer-Mobile';
 import Hero from './components/hero';
 import About from './components/about';
 import Skills from './components/Skills';
@@ -46,6 +47,7 @@ function App() {
           <Route path='/experience' element={<Experience />} />z
         </Routes>
         <Footer />
+        <MobileFooter />
       </BrowserRouter>
     </>
   )

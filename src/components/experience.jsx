@@ -1,5 +1,6 @@
-import WorkExperience from './work-experience';
+import React from 'react';
 import Certificates from './certificates';
+import WorkExperience from './workExperience';
 
 function Experience(){
     return(

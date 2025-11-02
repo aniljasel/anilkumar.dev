@@ -1,32 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from "react-router-dom";
 
 function MobileFooter() {
+    const location = useLocation();
+    const [activeIndex, setActiveIndex] = useState(2);
+
     const navItems = [
-        { icon: "fa-user", label: "About" },
-        { icon: "fa-laptop-code", label: "Skills" },
-        { icon: "fa-home", label: "Home" },
-        { icon: "fa-briefcase", label: "Projects" },
-        { icon: "fa-award", label: "Experience" },
+        { to: "about", icon: "fa-user", label: "About" },
+        { to: "skills", icon: "fa-laptop-code", label: "Skills" },
+        { to: "/", icon: "fa-home", label: "Home" },
+        { to: "project", icon: "fa-briefcase", label: "Projects" },
+        { to: "experience", icon: "fa-award", label: "Experience" },
     ];
 
-    const [activeIndex, setActiveIndex] = useState(0);
-
+    useEffect(() => {
+        const index = navItems.findIndex(item => location.pathname.includes(item.to));
+        if (index !== -1) setActiveIndex(index);
+    }, [location.pathname]);
+    
     return (
         <nav className="mobile-bottom-nav">
             <ul>
                 {navItems.map((item, index) => (
-                    <li
-                        key={index}
-                        className={`list ${activeIndex === index ? "active" : ""}`}
-                        onClick={() => setActiveIndex(index)}
-                    >
-                        <a href="#" className="nav-icon">
+                    <li key={index} className={`list ${activeIndex === index ? "active" : ""}`} onClick={() => setActiveIndex(index)}>
+                        <Link to={item.to} className="nav-icon">
                             <span className="icon">
                                 <i className={`fas ${item.icon}`}></i>
                             </span>
                             <span className="text">{item.label}</span>
-                        </a>
+                        </Link>
                     </li>
                 ))}
                 <div

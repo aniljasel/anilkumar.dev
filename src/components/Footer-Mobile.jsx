@@ -6,23 +6,31 @@ function MobileFooter() {
     const [activeIndex, setActiveIndex] = useState(2);
 
     const navItems = [
-        { to: "about", icon: "fa-user", label: "About" },
-        { to: "skills", icon: "fa-laptop-code", label: "Skills" },
+        { to: "/about", icon: "fa-user", label: "About" },
+        { to: "/skills", icon: "fa-laptop-code", label: "Skills" },
         { to: "/", icon: "fa-home", label: "Home" },
-        { to: "project", icon: "fa-briefcase", label: "Projects" },
-        { to: "experience", icon: "fa-award", label: "Experience" },
+        { to: "/project", icon: "fa-briefcase", label: "Projects" },
+        { to: "/experience", icon: "fa-award", label: "Experience" },
     ];
 
     useEffect(() => {
-        const index = navItems.findIndex(item => location.pathname.includes(item.to));
-        if (index !== -1) setActiveIndex(index);
+        const current = navItems.findIndex(item => location.pathname === item.to);
+        if (current !== -1) setActiveIndex(current);
     }, [location.pathname]);
-    
+
+    const handleNavClick = (index) => {
+        setActiveIndex(index);
+    };
+
     return (
         <nav className="mobile-bottom-nav">
             <ul>
                 {navItems.map((item, index) => (
-                    <li key={index} className={`list ${activeIndex === index ? "active" : ""}`} onClick={() => setActiveIndex(index)}>
+                    <li
+                        key={index}
+                        className={`list ${activeIndex === index ? "active" : ""}`}
+                        onClick={() => handleNavClick(index)}
+                    >
                         <Link to={item.to} className="nav-icon">
                             <span className="icon">
                                 <i className={`fas ${item.icon}`}></i>

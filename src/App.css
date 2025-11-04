@@ -188,6 +188,10 @@ header {
     position: relative;
 }
 
+.logo span {
+    color: var(--primary);
+}
+
 .logo::after {
     content: '';
     position: absolute;
@@ -393,7 +397,9 @@ header {
 
 .cta-button {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 8px 30px;
+    margin-right: 20px;
+    margin-bottom: 10px;
     background: linear-gradient(45deg, var(--primary), var(--secondary));
     color: var(--dark);
     text-decoration: none;
@@ -427,29 +433,9 @@ header {
     box-shadow: 0 10px 20px rgba(0, 247, 255, 0.3);
 }
 
-/* .hero-image {
-    position: absolute;
-    right: 5%; top: 50%;
-    background: var(--glass);
-    transform: translateY(-50%);
-    width: 40%;
-    height: 70%;
-    border-radius: 50%;
-    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-    animation: pulse 4s infinite ease-in-out;
-    opacity: 0.5;
+.cta-button i {
+    margin-right: 10px;
 }
-
-.hero-image img {
-    position: absolute;
-    width: 70%;
-    border-radius: 50%;
-    right: 10%;
-    top: 20%;
-    border: 2px solid var(--primary);
-    box-shadow: 0 8px 32px 20px rgba(0, 247, 255, 0.25);
-    opacity: 1;
-} */
 
 @keyframes pulse {
 
@@ -919,6 +905,7 @@ footer {
     backdrop-filter: blur(4px);
     border-top: 1.5px solid var(--glass-border);
     padding: 30px 5%;
+    z-index: 500;
 }
 
 .footer-container {
@@ -926,6 +913,7 @@ footer {
     justify-content: space-around;
 }
 
+/* left side of footer */
 .footer-left {
     display: grid;
     flex: 1;
@@ -939,6 +927,7 @@ footer {
     width: 56%;
 }
 
+/* right side of footer */
 .footer-right {
     display: flex;
     flex: 2;
@@ -948,9 +937,63 @@ footer {
     align-content: left;
 }
 
+.contact-row i {
+    margin-right: 10px;
+    font-size: large;
+    padding: 5px 0;
+    margin-bottom: 15px;
+    color: var(--light);
+}
+
+.contact-row i:hover {
+    color: var(--primary);
+    
+}
+
+.contact-row a,
+.contact-row span {
+    color: var(--light);
+    font-weight: 400;
+    position: relative;
+    padding: 5px 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-row a::after,
+.contact-row span::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.contact-row a:hover::after,
+.contact-row span:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.footer-links h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
 .footer-links .nav-links {
     display: grid;
     gap: 10px;
+}
+
+.footer-links .nav-links a {
+    font-weight: 400;
+    width: max-content;
+
 }
 
 .footer-social-links {
@@ -1527,10 +1570,6 @@ footer {
 
     .hero h1 {
         font-size: 2.5rem;
-    }
-
-    .hero-image {
-        display: none;
     }
 
     .project-filter {

@@ -56,6 +56,7 @@ function Hero() {
                         I build exceptional digital experiences with modern technologies and innovative solutions.
                     </p>
                     <Link to="contact" className="cta-button fade-in delay-3">Get In Touch</Link>
+                    <Link to="contact" className="cta-button fade-in delay-3"><i className="fas fa-download"></i>Resume</Link>
                 </div>
                 <div className="floating-icons">
                     <i className="fab fa-html5 floating-icon" style={{ top: '20%', left: '10%', animationDelay: '0s' }}></i>

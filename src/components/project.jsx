@@ -5,6 +5,7 @@ import project3 from '../assests/media/DPDigitalAgency.png';
 import project4 from '../assests/media/Personal-Desktop.png';
 import project5 from '../assests/media/Music-Player.png';
 import project6 from '../assests/media/Snapzy.png';
+import project7 from '../assests/media/load-project.png';
 
 const Project = () => {
     const [filter, setFilter] = useState('all');
@@ -24,7 +25,7 @@ const Project = () => {
             id: 2,
             title: 'Paying Guest',
             description: 'This Hostel Management System allows you to easily manage room allocations, tenant details, and update or delete user data in real time.',
-            tags: ['HTML5', 'CSS', 'React', 'JavaScirpt', 'Node', 'MongoDB'],
+            tags: ['HTML5', 'CSS', 'React', 'JavaScript', 'Node', 'MongoDB'],
             image: project2,
             demoLink: 'https://paying-guest-smoky.vercel.app',
             codeLink: 'https://github.com/AU-Teams/paying-guest',
@@ -34,7 +35,7 @@ const Project = () => {
             id: 3,
             title: 'DPDigitalAgency',
             description: 'Developed a responsive website for DP Creatives showcasing their digital marketing, SEO, and web development services with a focus on enhancing brand presence and client engagement.',
-            tags: ['HTML5', 'CSS', 'JavaScirpt'],
+            tags: ['HTML5', 'CSS', 'JavaScript'],
             image: project3,
             demoLink: 'https://aniljasel.github.io/DPDigitalAgency',
             codeLink: 'https://github.com/aniljasel/DPDigitalAgency',
@@ -44,7 +45,7 @@ const Project = () => {
             id: 4,
             title: 'Personal Desktop',
             description: 'This project is a unique and interactive portfolio website designed to look and function like a desktop operating system. It showcases my technical skills and projects within a creative and engaging user interface.',
-            tags: ['HTML5', 'CSS', 'React', 'JavaScirpt', 'API', 'Tailwind CSS'],
+            tags: ['HTML5', 'CSS', 'React', 'JavaScript', 'API', 'Tailwind CSS'],
             image: project4,
             demoLink: 'https://personal-desktop.vercel.app/',
             codeLink: 'https://github.com/aniljasel/Personal-Desktop',
@@ -54,7 +55,7 @@ const Project = () => {
             id: 5,
             title: 'Music Player',
             description: 'Developed a responsive web-based music player that allows users to listen to their favorite songs, play playlist songs, and control playback with an intuitive interface. Incorporated features such as play, pause, skip, and volume control to enhance user experience.',
-            tags: ['HTML5', 'CSS', 'JavaScirpt', 'API'],
+            tags: ['HTML5', 'CSS', 'JavaScript', 'API'],
             image: project5,
             demoLink: 'https://aniljasel.github.io/Music_Player/',
             codeLink: 'https://github.com/aniljasel/Music_Player',
@@ -64,11 +65,41 @@ const Project = () => {
             id: 6,
             title: 'Snapzy',
             description: 'Snapzy is a modern, neon-themed YouTube-style video streaming web application built with a focus on UI aesthetics, responsiveness, and real-time video playback. The platform replicates the core features of YouTube including video search, playback controls.',
-            tags: ['HTML5', 'CSS', 'JavaScirpt', 'API'],
+            tags: ['HTML5', 'CSS', 'JavaScript', 'API'],
             image: project6,
             demoLink: 'https://aniljasel.github.io/Snapzy',
             codeLink: 'https://github.com/aniljasel/Snapzy',
             category: ['frontend']
+        },
+        {
+            id: 7,
+            title: <div className="skeleton short"></div>,
+            description: <div className="skeleton long"></div>,
+            tags: <div className="skeleton long"></div>,
+            image: project7,
+            demoLink: '#',
+            codeLink: '#',
+            category: []
+        },
+        {
+            id: 7,
+            title: <div className="skeleton short"></div>,
+            description: <div className="skeleton long"></div>,
+            tags: <div className="skeleton long"></div>,
+            image: project7,
+            demoLink: '#',
+            codeLink: '#',
+            category: []
+        },
+        {
+            id: 7,
+            title: <div className="skeleton short"></div>,
+            description: <div className="skeleton long"></div>,
+            tags: <div className="skeleton long"></div>,
+            image: project7,
+            demoLink: '#',
+            codeLink: '#',
+            category: []
         }
     ];
 
@@ -106,13 +137,21 @@ const Project = () => {
                             <h3 className="project-title">{project.title}</h3>
                             <p className="project-description">{project.description}</p>
                             <div className="project-tags">
-                                {project.tags.map((tag, index) => (
-                                    <span className="project-tag" key={index}>{tag}</span>
+                                {Array.isArray(project.tags) && project.tags.map((tag, index) => (
+                                    <span className="project-tag" key={`${project.id}-tag-${index}`}>{tag}</span>
                                 ))}
                             </div>
                             <div className="project-links">
-                                <a href={project.demoLink} className="project-link" target='blank'><i className="fas fa-external-link-alt"></i> Live Demo</a>
-                                <a href={project.codeLink} className="project-link" target='blank'><i className="fab fa-github"></i> View Code</a>
+                                {project.demoLink && typeof project.demoLink === 'string' && (
+                                    <a href={project.demoLink} className="project-link" target="_blank" rel="noopener noreferrer">
+                                        <i className="fas fa-external-link-alt"></i> Live Demo
+                                    </a>
+                                )}
+                                {project.codeLink && typeof project.codeLink === 'string' && (
+                                    <a href={project.codeLink} className="project-link" target="_blank" rel="noopener noreferrer">
+                                        <i className="fab fa-github"></i> View Code
+                                    </a>
+                                )}
                             </div>
                         </div>
                     </div>

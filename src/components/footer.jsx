@@ -44,7 +44,7 @@ function Footer() {
             <footer>
                 <div className='footer-container'>
                     <div className='footer-left'>
-                        <Link to='/' className="logo">DEV<span>PORTFOLIO</span></Link>
+                        <Link to='/' className="logo"><span>DEV</span>PORTFOLIO</Link>
                         <div className="footer-social-links">
                             <a
                                 href="https://github.com/aniljasel"
@@ -106,6 +106,7 @@ function Footer() {
                     </div>
                     <div className='footer-right'>
                         <div className='footer-links'>
+                            <h3>Site Map</h3>
                             <nav className='nav-links'>
                                 <Link to="/">Home</Link>
                                 <Link to="about">About</Link>
@@ -113,13 +114,29 @@ function Footer() {
                             </nav>
                         </div>
                         <div className='footer-links'>
+                            <h3>Site Map</h3>
                             <nav className='nav-links'>
                                 <Link to="project">Projects</Link>
                                 <Link to="experience">Experience</Link>
                                 <Link to="contact">Contact</Link>
                             </nav>
                         </div>
-                    </div>
+                        <div className='footer-links'>
+                            <h3>Get in touch</h3>
+                            <div className="contact-row">
+                                <i className="fas fa-envelope"></i>
+                                <a href="mailto:anilkumar.dev7834@gmail.com" className='email-link' onMouseMove={e => handleMouseMove(e, "Email")} onMouseLeave={handleMouseLeave}>anilkumar.dev7834@gmail.com</a>
+                            </div>
+                            <div className="contact-row">
+                                <i className="fas fa-map-marker-alt"></i>
+                                <span className="location-text" onMouseMove={e => handleMouseMove(e, "Location")} onMouseLeave={handleMouseLeave}>Jaipur, Rajasthan, India</span>
+                            </div>
+                            <div className='contact-row'>
+                                <i className='fas fa-phone-alt'></i>
+                                <a href="tel:+916378346576" className='phone-link' onMouseMove={e => handleMouseMove(e, "Phone")} onMouseLeave={handleMouseLeave}>+91 637-834-6576</a>
+                            </div>
+                        </div>
+                    </div>    
                 </div>
             </footer >
 
@@ -136,7 +153,7 @@ function Footer() {
                     </div>
                 )
             } */}
-            
+
             <div className="Whatsapp-toggle" aria-label="Toggle whatsapp" onMouseMove={(e) => handleMouseMove(e, "Connect")} onMouseLeave={handleMouseLeave}>
                 <a href="https://wa.me/916378346576" target="_blank"><i className="fab fa-whatsapp"></i></a>
             </div>

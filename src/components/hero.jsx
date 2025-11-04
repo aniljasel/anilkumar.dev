@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, {Suspense, lazy, useEffect, useState } from 'react';
 const Loader = lazy(() => import('./loader.jsx'));
 import CardSwap, { Card } from './CardSwap'
@@ -7,6 +7,7 @@ import Frontend from '../assests/media/Frontend.png';
 import Backend from '../assests/media/Backend.png';
 
 function Hero() {
+    const navigate = useNavigate();
     const [typedText, setTypedText] = useState('');
     const fullText = "Hi, I'm Anil Kumar";
 
@@ -42,6 +43,18 @@ function Hero() {
         return () => clearTimeout(timer);
     }, []);
 
+    // logic for resume button
+    const scrollToResume = (e) => {
+        e.preventDefault();
+        const el = document.getElementById('resume');
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.history.replaceState(null, '', '#resume');
+            return;
+        }
+        navigate('/skills', { state: { scrollTo: 'resume' } });
+    };
+
     return (
         <section className="hero" id="home">
             <div className="hero-container">
@@ -56,7 +69,7 @@ function Hero() {
                         I build exceptional digital experiences with modern technologies and innovative solutions.
                     </p>
                     <Link to="contact" className="cta-button fade-in delay-3">Get In Touch</Link>
-                    <Link to="contact" className="cta-button fade-in delay-3"><i className="fas fa-download"></i>Resume</Link>
+                    <a href="#resume" className="cta-button fade-in delay-3" onClick={scrollToResume}><i className="fas fa-download"></i>Resume</a>
                 </div>
                 <div className="floating-icons">
                     <i className="fab fa-html5 floating-icon" style={{ top: '20%', left: '10%', animationDelay: '0s' }}></i>

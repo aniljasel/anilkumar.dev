@@ -111,7 +111,7 @@ const Resume = () => {
   }, [zoom]);
 
   return (
-    <section className="section">
+    <section className="section" id='resume'>
       <h2 className="section-title">Resume</h2>
       <div className="pdf-toolbar">
         <div className="toolbar-group">

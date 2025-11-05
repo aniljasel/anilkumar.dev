@@ -154,11 +154,11 @@ function Footer() {
                 )
             } */}
 
-            <div className="Whatsapp-toggle" aria-label="Toggle whatsapp" onMouseMove={(e) => handleMouseMove(e, "Connect")} onMouseLeave={handleMouseLeave}>
+            <div className="Whatsapp-toggle" aria-label="Toggle whatsapp">
                 <a href="https://wa.me/916378346576" target="_blank"><i className="fab fa-whatsapp"></i></a>
             </div>
 
-            <div className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme" onMouseMove={(e) => handleMouseMove(e, "Theme")} onMouseLeave={handleMouseLeave}>
+            <div className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
                 {isLightTheme ? (
                     <i className="fas fa-sun"></i>
                 ) : (

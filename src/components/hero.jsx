@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, {Suspense, lazy, useEffect, useState } from 'react';
 const Loader = lazy(() => import('./loader.jsx'));
-import CardSwap, { Card } from './CardSwap'
+import CardSwap, { Card } from './CardSwap';
+import About from "./about.jsx";
 import UIUX from '../assests/media/UI-UX.png';
 import Frontend from '../assests/media/Frontend.png';
 import Backend from '../assests/media/Backend.png';
@@ -57,7 +58,7 @@ function Hero() {
 
     return (
         <section className="hero" id="home">
-            <div className="hero-container">
+            <section className="hero-container">
                 <div className="hero-content">
                     <h1 className="fade-in">{typedText}</h1>
                     <h2 className="fade-in delay-1">
@@ -83,7 +84,8 @@ function Hero() {
                         <Loader />
                     </div>
                 </Suspense>
-            </div>
+            </section>
+            <About />
             <section className="section">
                 <h2 className="section-title"> Stacked Interface </h2>
                 <div className="card-section">

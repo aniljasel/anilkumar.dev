@@ -125,15 +125,15 @@ function Footer() {
                             <h3>Get in touch</h3>
                             <div className="contact-row">
                                 <i className="fas fa-envelope"></i>
-                                <a href="mailto:anilkumar.dev7834@gmail.com" className='email-link' onMouseMove={e => handleMouseMove(e, "Email")} onMouseLeave={handleMouseLeave}>anilkumar.dev7834@gmail.com</a>
+                                <a href="mailto:anilkumar.dev7834@gmail.com" className='email-link'>anilkumar.dev7834@gmail.com</a>
                             </div>
                             <div className="contact-row">
                                 <i className="fas fa-map-marker-alt"></i>
-                                <span className="location-text" onMouseMove={e => handleMouseMove(e, "Location")} onMouseLeave={handleMouseLeave}>Jaipur, Rajasthan, India</span>
+                                <span className="location-text">Jaipur, Rajasthan, India</span>
                             </div>
                             <div className='contact-row'>
                                 <i className='fas fa-phone-alt'></i>
-                                <a href="tel:+916378346576" className='phone-link' onMouseMove={e => handleMouseMove(e, "Phone")} onMouseLeave={handleMouseLeave}>+91 637-834-6576</a>
+                                <a href="tel:+916378346576" className='phone-link'>+91 637-834-6576</a>
                             </div>
                         </div>
                     </div>    

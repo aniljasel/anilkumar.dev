@@ -103,7 +103,7 @@ const Project = () => {
         }
     ];
 
-    const categories = ['all', 'frontend', 'backend', 'fullstack'];
+    const categories = ['all', 'frontend', 'backend', 'fullstack', '3D Website'];
 
     const handleFilterChange = (category) => {
         setFilter(category);

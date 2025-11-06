@@ -516,11 +516,11 @@ header {
     background: linear-gradient(90deg, var(--primary), var(--accent));
 }
 
-.about-content {
-    display: flex;
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
     align-items: center;
-    gap: 50px;
-    margin-top: 50px;
 }
 
 .about-text {
@@ -532,33 +532,66 @@ header {
     line-height: 1.6;
 }
 
-.about-image {
-    flex: 1;
+.about-3d {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(420px, 45vh, 820px);
+  border-radius: 12px;  
+}
+
+.spline-wrapper {
+    transform-origin: center center;
     position: relative;
-    height: 400px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    width: auto;
+    min-width: 1100px; 
+  left: 10%;
+  transition: left .3s ease;
+}
+/* .about-3d:hover .spline-wrapper {
+  left: -60px;
+} */
+
+/* adjust for medium screens */
+@media (max-width: 1200px) {
+    .spline-wrapper {
+        width: 95%;
+        max-width: 1100px;
+    }
+
+    .spline-wrapper.scale-lg {
+        transform: scale(1.05);
+    }
+
+    .about-3d {
+        min-height: clamp(360px, 42vh, 640px);
+    }
 }
 
-.about-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+/* mobile: stack and remove scale so model fits */
+@media (max-width: 900px) {
+    .spline-wrapper {
+        left: 22%;
+    }
+
+    .spline-wrapper.scale-lg {
+        transform: none;
+    }
+}
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spline-wrapper {
+        min-width: 750px; 
+        left: 12%;
+    }
 }
 
-.about-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    border-radius: 10px;
-    border: 1.5px solid var(--glass-border);
-}
 
 /* Skills Section */
 .skills-container {
@@ -1574,6 +1607,7 @@ footer {
 
     .project-filter {
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .filter-btn {
@@ -2037,6 +2071,10 @@ svg {
   .card-section {
     margin-top: 10px;
     margin-bottom: 50px;
+  }
+  
+  .skills-container {
+    grid-template-columns: auto;
   }
 
   .hero .section-title {

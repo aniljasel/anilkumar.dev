@@ -6,13 +6,23 @@ export default defineConfig(async () => {
   const plugins = [react()];
 
   if (isProd) {
-    const compressionMod = await import('vite-plugin-compression').catch(() => ({ default: null }));
-    const visualizerMod = await import('rollup-plugin-visualizer').catch(() => ({ default: null }));
-    const viteCompression = compressionMod.default;
-    const visualizer = visualizerMod.default;
-
-    if (viteCompression) plugins.push(viteCompression({ algorithm: 'brotliCompress' }));
-    if (visualizer) plugins.push(visualizer({ filename: 'dist/stats.html', open: false }));
+    try {
+      const compressionMod = await import('vite-plugin-compression');
+      if (compressionMod.default) {
+        plugins.push(compressionMod.default({ algorithm: 'brotliCompress' }));
+      }
+      
+      if (!process.env.VERCEL) {
+        const { visualizer } = await import('rollup-plugin-visualizer');
+        plugins.push(visualizer({
+          filename: 'dist/stats.html',
+          open: false,
+          gzipSize: true
+        }));
+      }
+    } catch (err) {
+      console.warn('Build optimization plugins failed to load:', err.message);
+    }
   }
 
   return {
@@ -22,7 +32,14 @@ export default defineConfig(async () => {
     },
     build: {
       target: 'es2019',
-      chunkSizeWarningLimit: 1200
+      chunkSizeWarningLimit: 1200,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom'],
+          }
+        }
+      }
     },
     server: {
       proxy: {

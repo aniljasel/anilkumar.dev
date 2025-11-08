@@ -1,7 +1,11 @@
-import React from "react";
-import Spline from "@splinetool/react-spline";
+import React, { useEffect, useState, Suspense, lazy } from "react";
+const Spline = lazy(() => import('@splinetool/react-spline'));
+ 
 
 export default function About() {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => { setMounted(true); }, []);
+
     return (
         <section className="section" id="about">
             <h2 className="section-title">About Me</h2>
@@ -27,10 +31,11 @@ export default function About() {
                 </div>
                 <div className="about-3d">
                     <div className="spline-wrapper scale-lg">
-                        <Spline
-                        scene="https://prod.spline.design/cb0LAzJreyf8vODd/scene.splinecode"
-                        className="spline-canvas"
-                        />
+                        {mounted && (
+                            <Suspense fallback={null}>
+                                <Spline scene="https://prod.spline.design/cb0LAzJreyf8vODd/scene.splinecode" className="spline-canvas" />
+                            </Suspense>
+                        )}
                     </div>
                 </div>
             </div>

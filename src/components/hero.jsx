@@ -69,8 +69,10 @@ function Hero() {
                     <p className="fade-in delay-2">
                         I build exceptional digital experiences with modern technologies and innovative solutions.
                     </p>
-                    <Link to="contact" className="cta-button fade-in delay-3">Get In Touch</Link>
-                    <a href="#resume" className="cta-button fade-in delay-3" onClick={scrollToResume}><i className="fas fa-download"></i>Resume</a>
+                    <div className="hero-cta delay-3">
+                        <Link to="contact" className="cta-button fade-in delay-3">Get In Touch</Link>
+                        <a href="#resume" className="cta-button fade-in delay-3" onClick={scrollToResume}><i className="fas fa-download"></i>Resume</a>
+                    </div>
                 </div>
                 <div className="floating-icons">
                     <i className="fab fa-html5 floating-icon" style={{ top: '20%', left: '10%', animationDelay: '0s' }}></i>

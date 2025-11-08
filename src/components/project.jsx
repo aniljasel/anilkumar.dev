@@ -85,7 +85,7 @@ const Project = () => {
         {
             id: 8,
             title: 'Upcoming Project',
-             description: <><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton short"></div></>,
+            description: <><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton short"></div></>,
             tags: <div className="skeleton long"></div>,
             image: project8,
             demoLink: '#',

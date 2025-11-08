@@ -395,11 +395,24 @@ header {
     opacity: 0.9;
 }
 
+.hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@media (max-width: 480px) {
+    .cta-button {
+        width: 100%; 
+        max-width: 92%;
+        text-align: center;
+        display: inline-block;
+    }
+}
+
 .cta-button {
     display: inline-block;
     padding: 8px 30px;
-    margin-right: 20px;
-    margin-bottom: 10px;
     background: linear-gradient(45deg, var(--primary), var(--secondary));
     color: var(--dark);
     text-decoration: none;
@@ -1513,6 +1526,14 @@ footer {
 @media (max-width: 992px) {
     .hero {
         text-align: center;
+    }
+
+    .hero-cta {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 0 12px;
+        margin-top: 50px;
     }
 
     .hero-container {

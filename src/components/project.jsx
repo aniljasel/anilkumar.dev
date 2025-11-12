@@ -8,6 +8,8 @@ import project6 from '../assests/media/Music-Player.png';
 import project7 from '../assests/media/Snapzy.png';
 import project8 from '../assests/media/load-project.png';
 
+import projectF1 from '../assests/media/Portfolio-F.png'
+
 const Project = () => {
     const [filter, setFilter] = useState('all');
 
@@ -82,15 +84,16 @@ const Project = () => {
             codeLink: 'https://github.com/aniljasel/Snapzy',
             category: ['frontend']
         },
+        // Figma Projects
         {
             id: 8,
-            title: 'Upcoming Project',
-            description: <><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton short"></div></>,
-            tags: <div className="skeleton long"></div>,
-            image: project8,
-            demoLink: '#',
-            codeLink: '#',
-            category: []
+            title: 'DevPortfolio',
+            description: 'DevPortfolio is a sleek and modern portfolio design created using Figma and Spline. It features a clean layout, interactive 3D elements, and a user-friendly interface to showcase projects and skills effectively.',
+            tags: ['Figma', 'Spline'],
+            image: projectF1,
+            demoLink: 'https://small-rain-3369.animaapp.io',
+            codeLink: 'https://www.figma.com/design/pDvu0s8PeauIAAmEWtZDxZ/DevPortfolio?node-id=0-1&t=3YTrbZd73GH1qLGJ-1',
+            category: ['figma']
         },
         {
             id: 9,
@@ -104,7 +107,7 @@ const Project = () => {
         }
     ];
 
-    const categories = ['all', 'frontend', 'backend', 'fullstack', '3D Website'];
+    const categories = ['all', 'frontend', 'backend', 'fullstack', '3D Website', 'figma'];
 
     const handleFilterChange = (category) => {
         setFilter(category);

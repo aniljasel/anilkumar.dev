@@ -9,67 +9,108 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 3001;
+const HF_KEY = process.env.HUGGINGFACE_API_KEY || "";
+const HF_MODEL = process.env.HUGGINGFACE_MODEL || "gpt2"; 
+
+function mockReply(message) {
+  const raw = (message || "").trim().toLowerCase();
+  if (!raw) return "Hi — I'm Sora your AI assistant. How can help you!";
+  if (raw.includes("hello") || raw.includes("hi")) {
+    return "Hello! I'm Sora. How can help you?.";
+  }
+  if (raw.includes("who are you")) {
+    return "I'm Sora — your AI assistant prototype powered by Anil Kumar.";
+  }
+  if (raw.includes("help")) {
+    return "Try asking: 'What can you do?', 'Tell me about Anil Kumar', or say 'demo'.";
+  }
+  if (raw.endsWith("?")) {
+    return "That's a good question — I'm running in mock mode right now; when API is enabled I'll answer smarter.";
+  }
+  return `I received "${message}". ....`;
+}
+
+async function callHuggingFace(message) {
+  if (!HF_KEY) throw new Error("HUGGINGFACE_API_KEY not set");
+
+  const url = "https://router.huggingface.co/hf-inference";
+
+  const body = {
+    model: HF_MODEL,
+    inputs: message,
+    parameters: {
+      max_new_tokens: 150,
+      temperature: 0.7
+    },
+    options: { wait_for_model: true }
+  };
+
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${HF_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const txt = await res.text();
+    const err = new Error(`HF inference error: ${res.status} ${res.statusText}`);
+    err.details = txt;
+    err.status = res.status;
+    throw err;
+  }
+
+  const data = await res.json();
+
+  if (Array.isArray(data) && data[0] && typeof data[0].generated_text === "string") {
+    return data[0].generated_text.trim();
+  }
+  if (data && typeof data.generated_text === "string") {
+    return data.generated_text.trim();
+  }
+  if (Array.isArray(data) && data.every(item => typeof item === "string")) {
+    return data.join("\n").trim();
+  }
+  for (const k of ["generated_text", "text", "output", "response"]) {
+    if (data && typeof data[k] === "string") return data[k].trim();
+  }
+
+  return JSON.stringify(data).slice(0, 1500);
+}
+
 app.post("/api/chat", async (req, res) => {
   try {
-    const { message } = req.body;
-    const apiKey = process.env.GROQ_API_KEY;
-
-    if (!message) return res.status(400).json({ error: "No message provided" });
-    if (!apiKey) return res.status(500).json({ error: "API key missing" });
-
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "llama-3.1-8b-instant",
-        messages: [
-          {
-            role: "system",
-            content: `You are Sora, a cool AI Female assistant created by Anil Kumar.
-            Introduce yourself as "Sora, your AI assistant powered by Anil Kumar" when asked "Who are you?".
-            Always act professional, helpful, and futuristic.
-            Anil Kumar is a MERN stack developer with expertise in React, Node.js, Express, and MongoDB.
-            Frontend Development: He creates responsive and user-friendly web interfaces using React, HTML, CSS, and JavaScript.
-            Graphic Design: He designs visually appealing graphics and layouts using tools like Figma and Canva.
-            He also built an AI-powered chatbot using Groq API and React.
-            He builds full-stack applications with modern, responsive UI and clean code.
-            He is experienced in creating REST APIs, managing databases, and deploying web projects.
-            He values problem-solving, performance, and user-friendly design.
-
-            When users ask about Anil Kumar, describe his professional skills and portfolio projects.
-            Never share sensitive or personal information such as home address, or credentials.
-            Always answer politely, clearly, and professionally.
-            
-            RULES:
-            - Answer only what the user specifically asks about.
-            - Do not reveal all information at once.
-            - If the user asks "Tell me about Anil Kumar", give a short professional intro only.
-            - If the user asks about projects, then provide project-related details.
-            - If the user asks about skills, then provide skill details.
-            - Never share personal/sensitive info (credentials).`,
-          },
-          { role: "user", content: message },
-        ],
-      }),
-    });
-
-    const data = await response.json();
-
-    if (data.error) {
-      return res.status(500).json({ error: data.error.message || "Groq API error" });
+    const { message } = req.body || {};
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({ error: "No message provided" });
     }
 
-    const reply =
-      data.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
+    if (HF_KEY) {
+      try {
+        const reply = await callHuggingFace(message);
+        return res.json({ reply });
+      } catch (hfErr) {
+        console.error("HuggingFace error — falling back to mock:", hfErr?.message || hfErr, hfErr?.details || "");
+        const fallback = mockReply(message);
+        return res.json({ reply: fallback, info: "fallback", note: "HuggingFace API error — returned mock reply." });
+      }
+    }
 
-    res.json({ reply });
+    const fallback = mockReply(message);
+    return res.json({ reply: fallback, info: "mock", note: "No HUGGINGFACE_API_KEY set on server." });
   } catch (err) {
-    res.status(500).json({ error: String(err) });
+    console.error("Server error in /api/chat:", err);
+    const safe = mockReply(req.body?.message || "");
+    return res.status(200).json({ reply: safe, info: "mock", note: "Server error occurred; returned mock reply." });
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.get("/api/health", (req, res) => res.json({ ok: true, huggingface: !!HF_KEY, model: HF_MODEL }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log("Hugging Face configured:", !!HF_KEY, "model:", HF_MODEL);
+});

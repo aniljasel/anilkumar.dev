@@ -13,44 +13,54 @@ const Chatbot = ({ onClose }) => {
     }, [messages, isTyping]);
 
     const handleSend = async () => {
-        if (input.trim() === "") return;
+        const text = input.trim();
+        if (text === "") return;
 
-        const userMessage = { text: input, sender: "user" };
+        // Create the user message object (we'll append locally and also include in history we send)
+        const userMessage = { text, sender: "user" };
+
+        // Append user message locally (so UI updates immediately)
         setMessages((prev) => [...prev, userMessage]);
         setInput("");
         setIsTyping(true);
 
         try {
+            // Build history to send to server: include existing messages + the new userMessage
+            // map your local message shape -> openai roles: user | assistant
+            const combined = [...messages, userMessage]; // `messages` is the current state value captured from closure
+            // keep only the last N messages to limit size (adjust N as needed)
+            const MAX_HISTORY_MESSAGES = 10;
+            const recent = combined.slice(-MAX_HISTORY_MESSAGES);
+
+            const historyForApi = recent.map((m) => ({
+                role: m.sender === "user" ? "user" : "assistant",
+                content: m.text,
+            }));
+
             const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || window.location.origin;
-            const response = await fetch(`${apiBaseUrl}/api/chat`, {
+            const resp = await fetch(`${apiBaseUrl}/api/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: input }),
+                // send both current message and the history (server should accept `history`)
+                body: JSON.stringify({ message: text, history: historyForApi }),
             });
 
-            let data;
-            try {
-                data = await response.json();
-            } catch {
-                data = {};
+            let data = {};
+            try { data = await resp.json(); } catch (_) { data = {}; }
+
+            if (!resp.ok) {
+                throw new Error(data?.error || `Request failed with status ${resp.status}`);
             }
-            
-            if (!response.ok) {
-                throw new Error(data?.error || `Request failed with status ${response.status}`);
-            }
+
+            const botText = data.reply || "☹️ Sorry, I couldn't generate a response.";
+            const botMessage = { text: botText, sender: "bot" };
             setIsTyping(false);
-
-            const botMessage = {
-                text: data.reply || data.error || "☹️ Sorry, I couldn't generate a response.",
-                sender: "bot",
-            };
-
             setMessages((prev) => [...prev, botMessage]);
-        } catch (error) {
+        } catch (err) {
             setIsTyping(false);
             setMessages((prev) => [
                 ...prev,
-                { text: `API Error: ${error?.message || "Please try again later."}` , sender: "bot" },
+                { text: `API Error: ${err?.message || "Please try again later."}`, sender: "bot" },
             ]);
         }
     };
@@ -63,22 +73,23 @@ const Chatbot = ({ onClose }) => {
                     <i className="fas fa-times"></i>
                 </button>
             </div>
+
             <div className="chatbot-messages">
                 {messages.map((msg, index) => (
-                    <div
-                        key={index}
-                        className={`chat-message ${msg.sender === "user" ? "user" : "bot"}`}
-                    >
+                    <div key={index} className={`chat-message ${msg.sender === "user" ? "user" : "bot"}`}>
                         {msg.text}
                     </div>
                 ))}
+
                 {isTyping && (
                     <div className="chat-message bot typing">
                         <span></span><span></span><span></span>
                     </div>
                 )}
-                <div ref={messagesEndRef}></div>
+
+                <div ref={messagesEndRef} />
             </div>
+
             <div className="chatbot-input">
                 <input
                     type="text"

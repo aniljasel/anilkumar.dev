@@ -51,8 +51,8 @@ function App() {
         <Footer />
         <MobileFooter />
       </BrowserRouter>
-    </>
-  )
+    </>  
+    )
 }
 
 export default App

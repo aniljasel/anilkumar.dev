@@ -1,13 +1,29 @@
-import React, { useEffect, useState, Suspense, lazy } from "react";
-const Spline = lazy(() => import('@splinetool/react-spline'));
- 
+import React, { Suspense, useRef, useState, useEffect } from "react";
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
 
 export default function About() {
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => { setMounted(true); }, []);
+    const [loaded, setLoaded] = useState(false);
+    const ref = useRef(null);
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setVisible(true);
+                    io.disconnect();
+                }
+            },
+            { threshold: 0.2 }
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
 
     return (
-        <section className="section" id="about">
+        <section className="section" id="about" ref={ref}>
             <h2 className="section-title">About Me</h2>
             <div className="about-grid">
                 <div className="about-text">
@@ -31,9 +47,13 @@ export default function About() {
                 </div>
                 <div className="about-3d">
                     <div className="spline-wrapper scale-lg">
-                        {mounted && (
-                            <Suspense fallback={null}>
-                                <Spline scene="https://prod.spline.design/cb0LAzJreyf8vODd/scene.splinecode" className="spline-canvas" />
+                        {visible && (
+                            <Suspense fallback={<div style={{ color: 'white', textAlign: 'center', marginTop: '20%' }}>Loading 3D Model...</div>}>
+                                <Spline
+                                    scene="https://prod.spline.design/cb0LAzJreyf8vODd/scene.splinecode"
+                                    className="spline-canvas"
+                                    onLoad={() => setLoaded(true)}
+                                />
                             </Suspense>
                         )}
                     </div>

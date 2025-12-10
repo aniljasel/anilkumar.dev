@@ -7,6 +7,7 @@ import project5 from '../assests/media/DPDigitalAgency.png';
 import project6 from '../assests/media/Music-Player.png';
 import project7 from '../assests/media/Snapzy.png';
 import project8 from '../assests/media/load-project.png';
+import project9 from '../assests/media/PoornimaBackbenchers.png'
 
 import projectF1 from '../assests/media/Portfolio-F.png'
 
@@ -14,6 +15,16 @@ const Project = () => {
     const [filter, setFilter] = useState('all');
 
     const projects = [
+        {
+            id: 9,
+            title: 'poornima-backbenchers',
+            description: '',
+            tags: ['HTML5', 'CSS', 'React', 'JavaScript', 'Supabase'],
+            image: project9,
+            demoLink: 'https://poornima-backbenchers.vercel.app/',
+            codeLink: 'https://github.com/aniljasel/poornima-backbenchers',
+            category: ['fullstack', 'backend']
+        },
         {
             id: 1,
             title: 'Schedule Manager',

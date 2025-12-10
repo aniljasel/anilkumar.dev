@@ -40,8 +40,9 @@ const ParticleBackground = () => {
                             push: {
                                 quantity: 4,
                             },
+                            // Disabled grab for performance
                             grab: {
-                                distance: 140,
+                                distance: 100, // Reduced distance
                                 line_linked: {
                                     opacity: 1,
                                 },
@@ -54,7 +55,7 @@ const ParticleBackground = () => {
                         },
                         links: {
                             color: "#00f7ff",
-                            distance: 150,
+                            distance: 120, // Reduced distance
                             enable: true,
                             opacity: 0.2,
                             width: 1,
@@ -66,15 +67,15 @@ const ParticleBackground = () => {
                                 default: "out",
                             },
                             random: true,
-                            speed: 1,
+                            speed: 0.6, // Slightly slower
                             straight: false,
                         },
                         number: {
                             density: {
                                 enable: true,
-                                area: 800,
+                                area: 1000, // Increased area (fewer particles per pixel)
                             },
-                            value: 80,
+                            value: 40, // Reduced from 80
                         },
                         opacity: {
                             value: 0.3,

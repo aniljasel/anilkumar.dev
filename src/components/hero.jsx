@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, {Suspense, lazy, useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 const Loader = lazy(() => import('./loader.jsx'));
 import CardSwap, { Card } from './CardSwap';
 import About from "./about.jsx";
@@ -81,7 +81,7 @@ function Hero() {
                     <i className="fab fa-react floating-icon" style={{ top: '60%', left: '70%', animationDelay: '3s' }}></i>
                     <i className="fab fa-node-js floating-icon" style={{ top: '80%', left: '85%', animationDelay: '4s' }}></i>
                 </div>
-                <Suspense fallback={<div style={{width:200,height:200}} aria-hidden/>}>
+                <Suspense fallback={<div style={{ width: 200, height: 200 }} aria-hidden />}>
                     <div className="svg-frame">
                         <Loader />
                     </div>

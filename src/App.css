@@ -373,20 +373,20 @@ header {
 }
 
 .flip-box {
-  display: inline-block;
-  perspective: 600px;
+    display: inline-block;
+    perspective: 600px;
 }
 
 .flip-box-inner {
-  display: inline-block;
-  transition: transform 0.6s cubic-bezier(.4,2,.3,.5);
-  transform-style: preserve-3d;
-  will-change: transform;
+    display: inline-block;
+    transition: transform 0.6s cubic-bezier(.4, 2, .3, .5);
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .flip-box.flipping .flip-box-inner {
-  transform: rotateX(180deg);
-  opacity: 0;
+    transform: rotateX(180deg);
+    opacity: 0;
 }
 
 .hero p {
@@ -403,7 +403,7 @@ header {
 
 @media (max-width: 480px) {
     .cta-button {
-        width: 100%; 
+        width: 100%;
         max-width: 92%;
         text-align: center;
         display: inline-block;
@@ -546,27 +546,24 @@ header {
 }
 
 .about-3d {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: clamp(420px, 45vh, 820px);
-  border-radius: 12px;  
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: clamp(420px, 45vh, 820px);
+    border-radius: 12px;
 }
 
 .spline-wrapper {
     transform-origin: center center;
     position: relative;
     width: auto;
-    min-width: 1100px; 
-  left: 10%;
-  transition: left .3s ease;
+    min-width: 1100px;
+    left: 10%;
+    transition: left .3s ease;
 }
-/* .about-3d:hover .spline-wrapper {
-  left: -60px;
-} */
 
 /* adjust for medium screens */
 @media (max-width: 1200px) {
@@ -594,13 +591,14 @@ header {
         transform: none;
     }
 }
+
 @media (max-width: 768px) {
     .about-grid {
         grid-template-columns: 1fr;
     }
 
     .spline-wrapper {
-        min-width: 750px; 
+        min-width: 750px;
         left: 12%;
     }
 }
@@ -722,19 +720,40 @@ header {
     opacity: 0.1;
 }
 
+/* Premium Card Hover Effect */
 .project-card {
     background: var(--glass);
     backdrop-filter: blur(10px);
-    border: 1.5px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
+    z-index: 1;
+}
+
+.project-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 247, 255, 0.2);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 247, 255, 0.15);
+    border-color: rgba(0, 247, 255, 0.3);
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.1) rotate(2deg);
 }
 
 .project-image {
@@ -993,7 +1012,7 @@ footer {
 
 .contact-row i:hover {
     color: var(--primary);
-    
+
 }
 
 .contact-row a,
@@ -1181,7 +1200,7 @@ footer {
     box-sizing: border-box;
     opacity: 0;
     transform: translate3d(0, 30px, 0);
-    transition: transform 0.45s ease, box-shadow 0.45s ease; 
+    transition: transform 0.45s ease, box-shadow 0.45s ease;
     will-change: transform, opacity;
 }
 
@@ -1250,22 +1269,35 @@ footer {
 
 /* Skeleton Loading Placeholder */
 .skeleton {
-  height: 14px;
-  width: 100%;
-  border-radius: 8px;
-  background: linear-gradient(90deg, #e7e7e781 25%, #716d6d81 50%, #e8e8e881 75%);
-  background-size: 200% 100%;
-  animation: shimmer 2.5s infinite;
-  margin-bottom: 12px;
+    height: 14px;
+    width: 100%;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #e7e7e781 25%, #716d6d81 50%, #e8e8e881 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s infinite;
+    margin-bottom: 12px;
 }
 
-.skeleton.short { width: 40%; }
-.skeleton.medium { width: 60%; }
-.skeleton.long { width: 90%; }
+.skeleton.short {
+    width: 40%;
+}
+
+.skeleton.medium {
+    width: 60%;
+}
+
+.skeleton.long {
+    width: 90%;
+}
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 /* Testimonials */
@@ -1568,7 +1600,7 @@ footer {
     .animate-circles {
         display: none;
     }
-    
+
     .cursor,
     .cursor-follower {
         display: none;
@@ -1982,159 +2014,160 @@ svg {
 
 /* Card Swapper-- */
 .card-swap-container {
-  width: min(92vw, 620px);
-  max-width: 720px;
-  height: min(64vh, 420px);
-  margin: 32px auto;
-  position: relative;
-  perspective: 1000px;
-  display: grid;
-  place-items: center;
-  touch-action: pan-y;
+    width: min(92vw, 620px);
+    max-width: 720px;
+    height: min(64vh, 420px);
+    margin: 32px auto;
+    position: relative;
+    perspective: 1000px;
+    display: grid;
+    place-items: center;
+    touch-action: pan-y;
 }
 
 .card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform-style: preserve-3d;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  width: clamp(200px, 200vw, 500px);
-  height: clamp(200px, 200vh, 400px);
-  border-radius: 14px;
-  border: 1.5px solid var(--glass-border);
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 18px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transform-origin: center center;
-  transition: transform 320ms cubic-bezier(.2,.9,.3,1), box-shadow 240ms;
-  cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-style: preserve-3d;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    width: clamp(200px, 200vw, 500px);
+    height: clamp(200px, 200vh, 400px);
+    border-radius: 14px;
+    border: 1.5px solid var(--glass-border);
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform-origin: center center;
+    transition: transform 320ms cubic-bezier(.2, .9, .3, 1), box-shadow 240ms;
+    cursor: pointer;
 }
 
 .card:active {
-  cursor: grabbing;
+    cursor: grabbing;
 }
 
 .card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .card-header {
-  padding: 12px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1.5px solid var(--glass-border);
-  background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1.5px solid var(--glass-border);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.02), transparent);
 }
 
 .card-header span {
-  margin-left: 10px;
+    margin-left: 10px;
     font-size: 1rem;
     font-weight: 600;
     color: var(--light);
 }
 
 .card:focus {
-  outline: none;
-  transform: translate3d(0, -6px, 10px) scale(1.01);
-  box-shadow: 0 26px 62px rgba(0,0,0,0.6);
-  z-index: 999 !important;
+    outline: none;
+    transform: translate3d(0, -6px, 10px) scale(1.01);
+    box-shadow: 0 26px 62px rgba(0, 0, 0, 0.6);
+    z-index: 999 !important;
 }
 
 .section .section-title {
-   font-size: 2rem;
+    font-size: 2rem;
 }
 
 .card-section {
-  margin-top: 100px;
-  display: flex;
-  gap: 18px;
-  padding: 10px;
-  flex-wrap: wrap;
-  align-items: flex-start;
+    margin-top: 100px;
+    display: flex;
+    gap: 18px;
+    padding: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
 .info-section {
-  flex: 1 1 280px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding: 12px;
+    flex: 1 1 280px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 12px;
 }
 
 .info-section h2 {
-  font-size: clamp(1.05rem, 2.2vw, 1.6rem);
+    font-size: clamp(1.05rem, 2.2vw, 1.6rem);
 }
 
 .info-section p {
-  line-height: 1.5;
-  font-size: clamp(0.9rem, 1.6vw, 1rem);
-  opacity: 0.95;
+    line-height: 1.5;
+    font-size: clamp(0.9rem, 1.6vw, 1rem);
+    opacity: 0.95;
 }
 
 /* mobile: stack slightly and reduce depth */
 @media (max-width: 768px) {
-  .card-swap-container {
-    width: 94vw;
-    margin: 20px auto;
-    padding: 18px 0 36px;
-  }
-
-  .card-section {
-    margin-top: 10px;
-    margin-bottom: 50px;
-  }
-  
-  .skills-container {
-    grid-template-columns: auto;
-  }
-
-  .hero .section-title {
-    left: 0;
-    transform: translateX(0);
-    text-align: center;
+    .card-swap-container {
+        width: 94vw;
+        margin: 20px auto;
+        padding: 18px 0 36px;
     }
 
-  .card {
-    width: clamp(180px, 45vw, 400px);
-    height: clamp(180px, 35vh, 360px);
-    transform: translate(-50%, -50%);
-    max-height: 460px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-    margin-left: -50px;
-  }
+    .card-section {
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
 
-  .card img {
-    height: 100%;
-  }
+    .skills-container {
+        grid-template-columns: auto;
+    }
 
-  .card:hover {
-    transform: translate3d(0, 0, 0);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.48);
-  }
+    .hero .section-title {
+        left: 0;
+        transform: translateX(0);
+        text-align: center;
+    }
+
+    .card {
+        width: clamp(180px, 45vw, 400px);
+        height: clamp(180px, 35vh, 360px);
+        transform: translate(-50%, -50%);
+        max-height: 460px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        margin-left: -50px;
+    }
+
+    .card img {
+        height: 100%;
+    }
+
+    .card:hover {
+        transform: translate3d(0, 0, 0);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.48);
+    }
 }
 
 /* very small screens */
 @media (max-width: 420px) {
-  .card {
-    border-radius: 10px;
-    /* width: auto; */
-  }
-  .card-header span {
-    font-size: 0.9rem;
-  }
+    .card {
+        border-radius: 10px;
+        /* width: auto; */
+    }
+
+    .card-header span {
+        font-size: 0.9rem;
+    }
 }
 
 /* ensure GSAP zIndex updates still work */
 .card[style] {
-  transform-origin: center center;
+    transform-origin: center center;
 }

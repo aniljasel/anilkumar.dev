@@ -43,7 +43,7 @@ export default function About() {
                     </RevealOnScroll>
                     <RevealOnScroll delay={0.4}>
                         <p>
-                            Currently pursuing my <strong>BCA at Poornima University</strong>, I am passionate about solving real-world problems through clean code and continuous learning.
+                            <strong>Bachelor of Computer Applications at Poornima University</strong>, I am passionate about solving real-world problems through clean code and continuous learning.
                         </p>
                     </RevealOnScroll>
                     <RevealOnScroll delay={0.6}>
@@ -59,34 +59,6 @@ export default function About() {
                             <div className="skill-card">
                                 <div className="skill-icon"><i className="fas fa-users"></i></div>
                                 <div className="skill-name">Leadership</div>
-                            </div>
-                        </div>
-                    </RevealOnScroll>
-
-                    <RevealOnScroll delay={0.8}>
-                        <div className="edu-exp-grid">
-                            <div className="edu-card">
-                                <h3>Education</h3>
-                                <ul>
-                                    <li>
-                                        <strong>BCA (2023 - 2026)</strong>
-                                        <p>Poornima University, Jaipur</p>
-                                    </li>
-                                    <li>
-                                        <strong>Class XII (2021-2022)</strong>
-                                        <p>Board of Secondary Education, Rajasthan</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="edu-card">
-                                <h3>Experience</h3>
-                                <ul>
-                                    <li>
-                                        <strong>Full Stack Trainee (May - July 2025)</strong>
-                                        <p>AU Ignite Future Skill Academy</p>
-                                        <p className="description">Built 4+ MERN apps, led UI team.</p>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </RevealOnScroll>

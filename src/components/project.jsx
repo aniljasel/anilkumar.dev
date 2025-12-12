@@ -18,8 +18,8 @@ const Project = () => {
         {
             id: 9,
             title: 'poornima-backbenchers',
-            description: '',
-            tags: ['HTML5', 'CSS', 'React', 'JavaScript', 'Supabase'],
+            description: 'Poornima Backbenchers is a modern, student-centric educational platform designed to streamline access to course materials, and administrative management. it features a premium glassmorphism UI and a robust backend powered by Supabase.',
+            tags: ['HTML5', 'React', 'JavaScript', 'Supabase', 'Vanilla CSS', 'Node.js'],
             image: project9,
             demoLink: 'https://poornima-backbenchers.vercel.app/',
             codeLink: 'https://github.com/aniljasel/poornima-backbenchers',

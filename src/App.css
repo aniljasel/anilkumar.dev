@@ -603,6 +603,53 @@ header {
     }
 }
 
+.edu-exp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.edu-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.edu-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-5px);
+}
+
+.edu-card h3 {
+    margin-bottom: 15px;
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.edu-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.edu-card li {
+    margin-bottom: 15px;
+}
+
+.edu-card strong {
+    display: block;
+    color: var(--light);
+    font-size: 0.95rem;
+}
+
+.edu-card p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 2px 0 0;
+}
+
 
 /* Skills Section */
 .skills-container {

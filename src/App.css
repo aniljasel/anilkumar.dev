@@ -773,6 +773,19 @@ header {
     transform: scale(1.1);
 }
 
+.project-header {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--light);
+    border: 1px solid var(--glass-border);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
 .project-info {
     padding: 20px;
 }

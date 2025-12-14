@@ -18,6 +18,7 @@ const Project = () => {
         {
             id: 9,
             title: 'poornima-backbenchers',
+            header: 'Latest Project',
             description: 'Poornima Backbenchers is a modern, student-centric educational platform designed to streamline access to course materials, and administrative management. it features a premium glassmorphism UI and a robust backend powered by Supabase.',
             tags: ['HTML5', 'React', 'JavaScript', 'Supabase', 'Vanilla CSS', 'Node.js'],
             image: project9,
@@ -28,6 +29,7 @@ const Project = () => {
         {
             id: 1,
             title: 'Schedule Manager',
+            header: '',
             description: 'Schedule Manager is the ultimate solution for individuals and teams looking to optimize their time management. Empower yourself with this essential tool for success!',
             tags: ['HTML5', 'CSS', 'React', 'JavaScript', 'Firebase'],
             image: project1,
@@ -38,6 +40,7 @@ const Project = () => {
         {
             id: 2,
             title: 'Personal Desktop',
+            header: '',
             description: 'This project is a unique and interactive portfolio website designed to look and function like a desktop operating system. It showcases my technical skills and projects within a creative and engaging user interface.',
             tags: ['HTML5', 'CSS', 'React', 'JavaScript', 'API', 'Tailwind CSS'],
             image: project2,
@@ -48,6 +51,7 @@ const Project = () => {
         {
             id: 3,
             title: 'Cyberfication 3D Site',
+            header: '',
             description: 'This is an interactive website that showcases a unique 3D scroll animation experience built with modern web technologies. Here are the key features:',
             tags: ['HTML5', 'CSS', 'JavaScript', 'Three.js', 'Canvas'],
             image: project3,
@@ -58,6 +62,7 @@ const Project = () => {
         {
             id: 4,
             title: 'Paying Guest',
+            header: '',
             description: 'This Hostel Management System allows you to easily manage room allocations, tenant details, and update or delete user data in real time.',
             tags: ['HTML5', 'CSS', 'React', 'JavaScript', 'Node', 'MongoDB'],
             image: project4,
@@ -68,6 +73,7 @@ const Project = () => {
         {
             id: 5,
             title: 'DPDigitalAgency',
+            header: '',
             description: 'Developed a responsive website for DP Creatives showcasing their digital marketing, SEO, and web development services with a focus on enhancing brand presence and client engagement.',
             tags: ['HTML5', 'CSS', 'JavaScript'],
             image: project5,
@@ -78,6 +84,7 @@ const Project = () => {
         {
             id: 6,
             title: 'Music Player',
+            header: '',
             description: 'Developed a responsive web-based music player that allows users to listen to their favorite songs, play playlist songs, and control playback with an intuitive interface. Incorporated features such as play, pause, skip, and volume control to enhance user experience.',
             tags: ['HTML5', 'CSS', 'JavaScript', 'API'],
             image: project6,
@@ -88,6 +95,7 @@ const Project = () => {
         {
             id: 7,
             title: 'Snapzy',
+            header: '',
             description: 'Snapzy is a modern, neon-themed YouTube-style video streaming web application built with a focus on UI aesthetics, responsiveness, and real-time video playback. The platform replicates the core features of YouTube including video search, playback controls.',
             tags: ['HTML5', 'CSS', 'JavaScript', 'API'],
             image: project7,
@@ -99,6 +107,7 @@ const Project = () => {
         {
             id: 8,
             title: 'DevPortfolio',
+            header: '',
             description: 'DevPortfolio is a sleek and modern portfolio design created using Figma and Spline. It features a clean layout, interactive 3D elements, and a user-friendly interface to showcase projects and skills effectively.',
             tags: ['Figma', 'Spline'],
             image: projectF1,
@@ -109,6 +118,7 @@ const Project = () => {
         {
             id: 9,
             title: 'Upcoming Project',
+            header: '',
             description: <><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton long"></div><br /><div className="skeleton short"></div></>,
             tags: <div className="skeleton long"></div>,
             image: project8,
@@ -148,6 +158,7 @@ const Project = () => {
                         <div className="project-image">
                             <img src={project.image} alt={project.title} />
                         </div>
+                        {project.header && <div className='project-header'>{project.header}</div>}
                         <div className="project-info">
                             <h3 className="project-title">{project.title}</h3>
                             <p className="project-description">{project.description}</p>
